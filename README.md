@@ -48,7 +48,7 @@ Supported Facebook API functionality:
 
 
 all the best!
-Vladimir, also Elena, Nate, Taras, Igor and the rest of [QuickBlox](http://quickblox.com/) team
+Vladimir (also Elena, Nate, Andrew, Sergey, Taras, Igor and the rest of [QuickBlox](http://quickblox.com/) team)
 
 more code samples for BlackBerry 5-7 and more of BB10 stuff coming soon at [QuickBlox BlackBerry Developers](http://quickblox.com/developers/Blackberry) section.
 
