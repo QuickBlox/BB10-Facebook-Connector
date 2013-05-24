@@ -46,7 +46,7 @@ Supported Facebook API functionality:
 - Get the info if I already liked this post before of not
 
 
-thanks! 
-- Vladimir, Taras, Nate, Igor and the rest of QuickBlox team
+all the best!
+Vladimir, also Elena, Nate, Taras, Igor and the rest of QuickBlox team
 
 
