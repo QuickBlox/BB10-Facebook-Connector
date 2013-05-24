@@ -5,7 +5,7 @@ Hi guys!
 We have been working on [BB10 app of Liverpool Football Club](http://appworld.blackberry.com/webstore/content/28055657/?countrycode=GB) and found that there is no decent Facebook API library for BlackBerry 10 yet. 
 So we had to create our own one and decided to share it with community so everybody can benefit. Please feel free to send pull request and generally feedback and suggest any imporvements.
 
--Supported Facebook API functionality:
+Supported Facebook API functionality:
 -
 
 - Login/logout (authorization);
