@@ -208,9 +208,25 @@ lupdate_inclusion {
              $$quote($$BASEDIR/../src/*.cc) \
              $$quote($$BASEDIR/../src/*.cpp) \
              $$quote($$BASEDIR/../src/*.cxx) \
+             $$quote($$BASEDIR/../src/facebook/*.c) \
+             $$quote($$BASEDIR/../src/facebook/*.c++) \
+             $$quote($$BASEDIR/../src/facebook/*.cc) \
+             $$quote($$BASEDIR/../src/facebook/*.cpp) \
+             $$quote($$BASEDIR/../src/facebook/*.cxx) \
+             $$quote($$BASEDIR/../src/oauth/*.c) \
+             $$quote($$BASEDIR/../src/oauth/*.c++) \
+             $$quote($$BASEDIR/../src/oauth/*.cc) \
+             $$quote($$BASEDIR/../src/oauth/*.cpp) \
+             $$quote($$BASEDIR/../src/oauth/*.cxx) \
              $$quote($$BASEDIR/../assets/*.qml) \
              $$quote($$BASEDIR/../assets/*.js) \
-             $$quote($$BASEDIR/../assets/*.qs)
+             $$quote($$BASEDIR/../assets/*.qs) \
+             $$quote($$BASEDIR/../assets/images/*.qml) \
+             $$quote($$BASEDIR/../assets/images/*.js) \
+             $$quote($$BASEDIR/../assets/images/*.qs) \
+             $$quote($$BASEDIR/../assets/videos/*.qml) \
+             $$quote($$BASEDIR/../assets/videos/*.js) \
+             $$quote($$BASEDIR/../assets/videos/*.qs)
 
     HEADERS +=  $$quote($$BASEDIR/../src/*.h) \
              $$quote($$BASEDIR/../src/*.h++) \
