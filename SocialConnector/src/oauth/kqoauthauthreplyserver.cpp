@@ -16,7 +16,7 @@
  *
  *  In addition, as a special exception, KQOauth provides you certain additional
  *  rights. These rights are described in the Nokia Qt LGPL Exception
- *  version 1.1, included in the file LGPL_EXCEPTION.txt in this package. 
+ *  version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
  *
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with KQOAuth.  If not, see <http://www.gnu.org/licenses/>
@@ -52,7 +52,7 @@ void KQOAuthAuthReplyServerPrivate::onIncomingConnection() {
 
 void KQOAuthAuthReplyServerPrivate::onBytesReady() {
     Q_Q(KQOAuthAuthReplyServer);
-    qDebug() << "Socket peer host address: " << socket->peerAddress();
+
     QByteArray reply;
     QByteArray content;
 
@@ -63,7 +63,7 @@ void KQOAuthAuthReplyServerPrivate::onBytesReady() {
 		 handlingRedirect = true;
 		 content.append("<HTML><head><script type=\"text/javascript\">var str='http://'+window.location.host + '?' + window.location.hash.substring(1); window.location=str;</script></head><h1>Account authorized!</h1></HTML>");
 	 } else {
-		 handlingRedirect = false;
+		handlingRedirect = false;
 		QFile file("app/native/assets/" + localFile);
 		QString fileData;
 		 if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -97,6 +97,7 @@ void KQOAuthAuthReplyServerPrivate::onBytesReady() {
 
 QMultiMap<QString, QString> KQOAuthAuthReplyServerPrivate::parseQueryParams(QByteArray *data) {
     QString splitGetLine = QString(*data).split("\r\n").first();   // Retrieve the first line with query params.
+
     splitGetLine.remove("GET ");                                   // Clean the line from GET
     splitGetLine.remove("HTTP/1.1");                               // From HTTP
     splitGetLine.remove("\r\n");                                   // And from rest.

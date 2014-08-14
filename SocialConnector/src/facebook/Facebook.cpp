@@ -20,7 +20,7 @@ Facebook* Facebook::m_instance = NULL;
 /* READ ME!!!
  * On developer Facebook site:
  * 1) Register your application on Facebook and receive "Application ID" and "Application Secret" keys.
- * 2) Define callback URL for application: http://localhost:61793/
+ * 2) Define callback URL for application: http://quickblox.github.io/BB10-Facebook-Connector/redirect?
  *
  * In this source code:
  * 1) Setup variables APPLICATION_ID and APPLICATION_SECRET in source code (Facebook.cpp), like:
@@ -33,7 +33,7 @@ const QString Facebook::APPLICATION_ID = QString("xxxxxxxxxxxxxx"); // setup her
 const QString Facebook::APPLICATION_SECRET = QString("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"); // setup here your Application Secret key
 
 //facebook URLs
-const QString Facebook::GRAPH_URL = "https://graph.facebook.com/";
+const QString Facebook::GRAPH_URL = "https://graph.facebook.com/v2.0/";
 const QString Facebook::VIDEO_GRAPH_URL = "https://graph-video.facebook.com/me/videos/";
 
 //facebook post types
@@ -43,90 +43,40 @@ const QString Facebook::POSTTYPE_STATUS = "status";
 const QString Facebook::POSTTYPE_LINK = "link";
 const QString Facebook::POSTTYPE_SWF = "swf";
 
-//Used Data Permissions
+// Public Profile (Default)
+const QString Facebook::PUBLIC_PROFILE = "public_profile";
+const QString Facebook::FRIENDS = "user_friends";
 const QString Facebook::EMAIL = "email";
-const QString Facebook::PUBLISH_ACTIONS = "publish_actions";
 const QString Facebook::USER_ABOUT_ME = "user_about_me";
 const QString Facebook::USER_ACTIVITIES = "user_activities";
 const QString Facebook::USER_BIRTHDAY = "user_birthday";
 const QString Facebook::USER_EDUCATION_HISTORY = "user_education_history";
 const QString Facebook::USER_EVENTS = "user_events";
-const QString Facebook::USER_GAMES_ACTIVITY = "user_games_activity";
 const QString Facebook::USER_GROUPS = "user_groups";
 const QString Facebook::USER_HOMETOWN = "user_hometown";
 const QString Facebook::USER_INTERESTS = "user_interests";
 const QString Facebook::USER_LIKES = "user_likes";
 const QString Facebook::USER_LOCATION = "user_location";
-const QString Facebook::USER_NOTES = "user_notes";
 const QString Facebook::USER_PHOTOS = "user_photos";
-const QString Facebook::USER_QUESTIONS = "user_photos";
 const QString Facebook::USER_RELATIONSHIPS = "user_relationships";
 const QString Facebook::USER_RELATIONSHIP_DETAILS = "user_relationship_details";
 const QString Facebook::USER_RELIGION_POLITICS = "user_religion_politics";
 const QString Facebook::USER_STATUS = "user_status";
-const QString Facebook::USER_SUBSCRIPTIONS = "user_subscriptions";
 const QString Facebook::USER_VIDEOS = "user_videos";
+const QString Facebook::USER_TRIGGED_PLACES = "user_tagged_places";
 const QString Facebook::USER_WEBSITE = "user_website";
 const QString Facebook::USER_WORK_HISTORY = "user_work_history";
-const QString Facebook::USER_PHOTO_VIDEO_TAGS = "user_photo_video_tags";
-//const QString Facebook::USER_ACTIONS_MUSIC = "user_actions.music";
-//const QString Facebook::USER_ACTIONS_NEWS = "user_actions.news";
-//const QString Facebook::USER_ACTIONS_VIDEO = "user_actions.video";
 
-//Friends Data Permissions
-const QString Facebook::FRIENDS_ABOUT_ME = "friends_about_me";
-const QString Facebook::FRIENDS_ACTIVITIES = "friends_activities";
-const QString Facebook::FRIENDS_BIRTHDAY = "friends_birthday";
-const QString Facebook::FRIENDS_EDUCATION_HISTORY = "friends_education_history";
-const QString Facebook::FRIENDS_EVENTS = "friends_events";
-const QString Facebook::FRIENDS_GAMES_ACTIVITY = "friends_games_activity";
-const QString Facebook::FRIENDS_GROUPS = "friends_groups";
-const QString Facebook::FRIENDS_HOMETOWN = "friends_hometown";
-const QString Facebook::FRIENDS_INTERESTS = "friends_interests";
-const QString Facebook::FRIENDS_LIKES = "friends_likes";
-const QString Facebook::FRIENDS_LOCATION = "friends_location";
-const QString Facebook::FRIENDS_NOTES = "friends_notes";
-const QString Facebook::FRIENDS_PHOTOS = "friends_photos";
-const QString Facebook::FRIENDS_VIDEOS = "friends_videos";
-const QString Facebook::FRIENDS_QUESTIONS = "friends_questions";
-const QString Facebook::FRIENDS_RELATIONSHIP_DETAILS = "friends_relationship_details";
-const QString Facebook::FRIENDS_RELATIONSHIPS = "friends_relationships";
-const QString Facebook::FRIENDS_RELIGION_POLITICS = "friends_religion_politics";
-const QString Facebook::FRIENDS_STATUS = "friends_status";
-const QString Facebook::FRIENDS_WEBSITE = "friends_website";
-const QString Facebook::FRIENDS_WORK_HISTORY = "friends_work_history";
-const QString Facebook::FRIENDS_CHECKINS = "friends_checkins";
-const QString Facebook::FRIENDS_PHOTO_VIDEO_TAGS = "friends_photo_video_tags";
-//const QString Facebook::FRIENDS_ACTIONS_MUSIC = "friends_actions.musi";
-//const QString Facebook::FRIENDS_ACTIONS_NEWS = "friends_actions.news";
-//const QString Facebook::FRIENDS_ACTIONS_VIDEO = "friends_actions.video";
-
-//Extended Permissions
-const QString Facebook::ADS_MANAGEMENT = "ads_management";
-const QString Facebook::CREATE_EVENT = "create_event";
-const QString Facebook::CREATE_NOTE = "create_note";
-const QString Facebook::EXPORT_STREAM = "export_stream";
-const QString Facebook::FRIENDS_ONLINE_PRESENCE = "friends_online_presence";
-const QString Facebook::MANAGE_FRIENDLISTS = "manage_friendlists";
-const QString Facebook::MANAGE_NOTIFICATIONS = "manage_notifications";
-const QString Facebook::MANAGE_PAGES = "manage_pages";
-const QString Facebook::OFFLINE_ACCESS = "offline_access";
-const QString Facebook::PHOTO_UPLOAD = "photo_upload";
-const QString Facebook::PUBLISH_CHECKINS = "publish_checkins";
-const QString Facebook::PUBLISH_STREAM = "publish_stream";
 const QString Facebook::READ_FRIENDLISTS = "read_friendlists";
 const QString Facebook::READ_INSIGHTS = "read_insights";
 const QString Facebook::READ_MAILBOX = "read_mailbox";
-const QString Facebook::READ_MAILBOXES = "read_page_mailboxes";
-const QString Facebook::READ_REQUESTS = "read_requests";
 const QString Facebook::READ_STREAM = "read_stream";
+
+const QString Facebook::MANAGE_NOTIFICATION = "manage_notifications";
+const QString Facebook::PUBLISH_ACTIONS = "publish_actions";
 const QString Facebook::RSVP_EVENT = "rsvp_event";
-const QString Facebook::SHARE_ITEM = "share_item";
-const QString Facebook::SMS = "sms";
-const QString Facebook::STATUS_UPDATE = "status_update";
-const QString Facebook::USER_ONLINE_PRESENCE = "user_online_presence";
-const QString Facebook::VIDEO_UPLOAD = "video_upload";
-const QString Facebook::XMPP_LOGIN = "xmpp_login";
+const QString Facebook::MANAGE_PAGES = "manage_pages";
+const QString Facebook::READ_PAGE_MAILBOXES = "read_page_mailboxes";
 
 
 Facebook::Facebook() {
@@ -249,7 +199,7 @@ void Facebook::login()
 		params.insert("scope", getAllPermissions());
 
 		oauthManager->setHandleUserAuthorization(true);
-		oauthManager->getOauth2UserAuthorization(QUrl("http://m.facebook.com/dialog/oauth"), APPLICATION_ID, params);
+		oauthManager->getOauth2UserAuthorization(QUrl("http://m.facebook.com/v2.0/dialog/oauth"), APPLICATION_ID, params);
 	}
 	else
 	{
@@ -298,33 +248,6 @@ bool Facebook::isAuthorized() {
 	return hasToken();
 }
 
-QString Facebook::getUserDataPermissions()
-{
-	QString out = EMAIL + "," + PUBLISH_ACTIONS + "," + USER_ABOUT_ME + "," + USER_ACTIVITIES + "," + USER_BIRTHDAY
-			+ "," + USER_EDUCATION_HISTORY + "," + USER_EVENTS + "," + USER_GAMES_ACTIVITY + "," + USER_GROUPS + "," + USER_HOMETOWN + "," + USER_INTERESTS + "," + USER_LIKES + "," + USER_LOCATION
-			+ "," + USER_NOTES + "," + USER_PHOTOS + "," + USER_QUESTIONS + "," + USER_RELATIONSHIPS + "," + USER_RELATIONSHIP_DETAILS + "," + USER_RELIGION_POLITICS + "," + USER_STATUS + "," + USER_SUBSCRIPTIONS
-			+ "," + USER_VIDEOS + "," + USER_WEBSITE + "," + USER_WORK_HISTORY + "," + USER_PHOTO_VIDEO_TAGS;
-	return out;
-}
-
-QString Facebook::getFriendsDataPermissions()
-{
-	QString out = FRIENDS_ABOUT_ME + "," +  FRIENDS_ACTIVITIES + "," + FRIENDS_BIRTHDAY
-			+ "," + FRIENDS_EDUCATION_HISTORY + "," + FRIENDS_EVENTS + "," + FRIENDS_GAMES_ACTIVITY + "," + FRIENDS_GROUPS + "," + FRIENDS_HOMETOWN + "," + FRIENDS_INTERESTS + "," + FRIENDS_LIKES
-			+ "," + FRIENDS_LOCATION + "," + FRIENDS_NOTES + "," + FRIENDS_PHOTOS + "," + FRIENDS_VIDEOS + "," + FRIENDS_QUESTIONS + "," + FRIENDS_RELATIONSHIP_DETAILS + "," + FRIENDS_RELATIONSHIPS
-			+ "," + FRIENDS_RELIGION_POLITICS  + "," + FRIENDS_STATUS + "," + FRIENDS_WEBSITE + "," + FRIENDS_WORK_HISTORY + "," + FRIENDS_CHECKINS + "," + FRIENDS_PHOTO_VIDEO_TAGS;
-
-	return out;
-}
-
-
-QString Facebook::getExtendedPermissions()
-{
-	QString out = ADS_MANAGEMENT + "," + CREATE_EVENT + "," + CREATE_NOTE + "," + EXPORT_STREAM + "," + FRIENDS_ONLINE_PRESENCE + "," + MANAGE_FRIENDLISTS + "," + MANAGE_NOTIFICATIONS + "," + MANAGE_PAGES + "," + OFFLINE_ACCESS
-			+ "," + PHOTO_UPLOAD + "," + PUBLISH_CHECKINS + "," + PUBLISH_STREAM + "," + READ_FRIENDLISTS + "," + READ_INSIGHTS + "," + READ_MAILBOX + "," + READ_MAILBOXES + "," + READ_REQUESTS + "," + READ_REQUESTS
-			+ "," + READ_STREAM + "," + RSVP_EVENT + "," + SHARE_ITEM + "," + SMS + "," + STATUS_UPDATE + "," + USER_ONLINE_PRESENCE + "," + VIDEO_UPLOAD + "," + XMPP_LOGIN;
-	return out;
-}
 
 QString Facebook::getCustomPermissions()
 {
@@ -334,9 +257,10 @@ QString Facebook::getCustomPermissions()
 
 QString Facebook::getAllPermissions()
 {
-	QString out = getUserDataPermissions()
-	      + "," + getFriendsDataPermissions()
-		  + "," + getExtendedPermissions();
+	QString out = PUBLIC_PROFILE + "," + FRIENDS + "," + EMAIL + "," + USER_ABOUT_ME + "," + USER_ACTIVITIES + "," + USER_BIRTHDAY + "," + USER_EDUCATION_HISTORY + "," + USER_EVENTS + "," + USER_GROUPS +
+			"," + USER_HOMETOWN + "," + USER_INTERESTS + "," + USER_LIKES + "," + USER_LOCATION + "," + USER_PHOTOS + "," + USER_RELATIONSHIPS + "," + USER_RELATIONSHIP_DETAILS + "," + USER_RELIGION_POLITICS +
+			"," + USER_STATUS + "," + USER_VIDEOS + "," + USER_TRIGGED_PLACES + "," + USER_WEBSITE + "," + USER_WORK_HISTORY + "," + READ_FRIENDLISTS + "," + READ_INSIGHTS + "," + READ_MAILBOX + "," + READ_STREAM +
+			"," + MANAGE_NOTIFICATION + "," + PUBLISH_ACTIONS + "," + RSVP_EVENT + "," + MANAGE_PAGES + "," + READ_PAGE_MAILBOXES;
 
 	qDebug()<<out;
 	return out;
@@ -362,6 +286,7 @@ void Facebook::getCurrentUser()
 {
 	if(hasToken())
 	{
+		qDebug() << "hasToken! ";
 		KQOAuth2Request *req = new KQOAuth2Request(this);
 		req->initRequest(KQOAuth2Request::AuthorizedRequest, QUrl(GRAPH_URL + "me"));
 		addAuth(req);

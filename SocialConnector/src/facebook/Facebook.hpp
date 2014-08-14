@@ -69,90 +69,40 @@ private:
 	static const QString POSTTYPE_SWF;
 
 	//User Data Permissions
+	static const QString PUBLIC_PROFILE;
+	static const QString FRIENDS;
 	static const QString EMAIL;
-	static const QString PUBLISH_ACTIONS;
+
 	static const QString USER_ABOUT_ME;
 	static const QString USER_ACTIVITIES;
 	static const QString USER_BIRTHDAY;
 	static const QString USER_EDUCATION_HISTORY;
 	static const QString USER_EVENTS;
-	static const QString USER_GAMES_ACTIVITY;
 	static const QString USER_GROUPS;
 	static const QString USER_HOMETOWN;
 	static const QString USER_INTERESTS;
 	static const QString USER_LIKES;
 	static const QString USER_LOCATION;
-	static const QString USER_NOTES;
 	static const QString USER_PHOTOS;
-	static const QString USER_QUESTIONS;
 	static const QString USER_RELATIONSHIPS;
 	static const QString USER_RELATIONSHIP_DETAILS;
 	static const QString USER_RELIGION_POLITICS;
 	static const QString USER_STATUS;
-	static const QString USER_SUBSCRIPTIONS;
 	static const QString USER_VIDEOS;
+	static const QString USER_TRIGGED_PLACES;
 	static const QString USER_WEBSITE;
 	static const QString USER_WORK_HISTORY;
-	static const QString USER_PHOTO_VIDEO_TAGS;
-	//static const QString USER_ACTIONS_MUSIC;
-	//static const QString USER_ACTIONS_NEWS;
-	//static const QString USER_ACTIONS_VIDEO;
 
-	//Friends Data Permissions
-	static const QString FRIENDS_ABOUT_ME;
-	static const QString FRIENDS_ACTIVITIES;
-	static const QString FRIENDS_BIRTHDAY;
-	static const QString FRIENDS_EDUCATION_HISTORY;
-	static const QString FRIENDS_EVENTS;
-	static const QString FRIENDS_GAMES_ACTIVITY;
-	static const QString FRIENDS_GROUPS;
-	static const QString FRIENDS_HOMETOWN;
-	static const QString FRIENDS_INTERESTS;
-	static const QString FRIENDS_LIKES;
-	static const QString FRIENDS_LOCATION;
-	static const QString FRIENDS_NOTES;
-	static const QString FRIENDS_PHOTOS;
-	static const QString FRIENDS_VIDEOS;
-	static const QString FRIENDS_QUESTIONS;
-	static const QString FRIENDS_RELATIONSHIP_DETAILS;
-	static const QString FRIENDS_RELATIONSHIPS;
-	static const QString FRIENDS_RELIGION_POLITICS;
-	static const QString FRIENDS_STATUS;
-	static const QString FRIENDS_WEBSITE;
-	static const QString FRIENDS_WORK_HISTORY;
-	static const QString FRIENDS_CHECKINS;
-	static const QString FRIENDS_PHOTO_VIDEO_TAGS;
-	//static const QString FRIENDS_ACTIONS_MUSIC;
-	//static const QString FRIENDS_ACTIONS_NEWS;
-	//static const QString FRIENDS_ACTIONS_VIDEO;
-
-	//Extended Permissions
-	static const QString ADS_MANAGEMENT;
-	static const QString CREATE_EVENT;
-	static const QString CREATE_NOTE;
-	static const QString EXPORT_STREAM;
-	static const QString FRIENDS_ONLINE_PRESENCE;
-	static const QString MANAGE_FRIENDLISTS;
-	static const QString MANAGE_NOTIFICATIONS;
-	static const QString MANAGE_PAGES;
-	static const QString OFFLINE_ACCESS;
-	static const QString PHOTO_UPLOAD;
-	static const QString PUBLISH_CHECKINS;
-	static const QString PUBLISH_STREAM;
 	static const QString READ_FRIENDLISTS;
 	static const QString READ_INSIGHTS;
 	static const QString READ_MAILBOX;
-	static const QString READ_MAILBOXES;
-	static const QString READ_REQUESTS;
 	static const QString READ_STREAM;
-	static const QString RSVP_EVENT;
-	static const QString SHARE_ITEM;
-	static const QString SMS;
-	static const QString STATUS_UPDATE;
-	static const QString USER_ONLINE_PRESENCE;
-	static const QString VIDEO_UPLOAD;
-	static const QString XMPP_LOGIN;
 
+	static const QString MANAGE_NOTIFICATION;
+	static const QString PUBLISH_ACTIONS;
+	static const QString RSVP_EVENT;
+	static const QString MANAGE_PAGES;
+	static const QString READ_PAGE_MAILBOXES;
 
 	static Facebook* m_instance;
     KQOAuthManager *oauthManager;

@@ -16,7 +16,7 @@
  *
  *  In addition, as a special exception, KQOauth provides you certain additional
  *  rights. These rights are described in the Nokia Qt LGPL Exception
- *  version 1.1, included in the file LGPL_EXCEPTION.txt in this package. 
+ *  version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
  *
  *  You should have received a copy of the GNU Lesser General Public License
  *  along with KQOAuth.  If not, see <http://www.gnu.org/licenses/>
@@ -187,10 +187,11 @@ void KQOAuthManager::executeRequest(KQOAuthRequest *request) {
         connect(d->callbackServer, SIGNAL(verificationReceived(QMultiMap<QString, QString>)),
                 this, SLOT( onVerificationReceived(QMultiMap<QString, QString>)));
 
-        QString serverString = "http://localhost:";
-        serverString.append(QString::number(d->callbackServer->serverPort()));
-        request->setCallbackUrl(QUrl(serverString));
-        qDebug() << serverString;
+        //QString serverString = "http://localhost:";
+        //serverString.append(QString::number(d->callbackServer->serverPort()));
+        //request->setCallbackUrl(QUrl(serverString));
+        //qDebug() << serverString;
+        request->setCallbackUrl(QUrl("http://quickblox.github.io/BB10-Facebook-Connector/redirect?"));
     }
 
     // And now fill the request with "Authorization" header data.
@@ -435,12 +436,13 @@ void KQOAuthManager::getOauth2UserAuthorization(QUrl authorizationEndpoint, QStr
     connect(d->callbackServer, SIGNAL(verificationReceived(QMultiMap<QString, QString>)),
             this, SLOT( onOauth2VerificationReceived(QMultiMap<QString, QString>)));
 
-    QString serverString = "http://localhost:";
-    serverString.append(QString::number(d->callbackServer->serverPort()));
+    //QString serverString = "http://localhost:";
+    //serverString.append(QString::number(d->callbackServer->serverPort()));
     QUrl openWebPageUrl(authorizationEndpoint.toString(), QUrl::StrictMode);
     openWebPageUrl.addQueryItem(OAUTH2_KEY_CLIENT_ID, consumerKey);
     openWebPageUrl.addQueryItem(OAUTH2_KEY_RESPONSE_TYPE, "token");
-    openWebPageUrl.addQueryItem(OAUTH2_KEY_REDIRECT_URI, serverString);
+    //openWebPageUrl.addQueryItem(OAUTH2_KEY_REDIRECT_URI, serverString);
+    openWebPageUrl.addQueryItem(OAUTH2_KEY_REDIRECT_URI, "http://quickblox.github.io/BB10-Facebook-Connector/redirect?");
     if(additionalParams.size() > 0) {
 		QList< QPair<QString, QString> > urlParams = d->createQueryParams(additionalParams);
 		for(int i=0; i < urlParams.length(); i++){
@@ -697,6 +699,8 @@ void KQOAuthManager::onVerificationReceived(QMultiMap<QString, QString> response
 
 void KQOAuthManager::onOauth2VerificationReceived(QMultiMap<QString, QString> response) {
     Q_D(KQOAuthManager);
+
+    qDebug() << "RESPONSE: " << response;
 
     foreach(QString key, response.keys()){
     	qDebug() << key;
